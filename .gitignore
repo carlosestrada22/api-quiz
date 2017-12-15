@@ -1,3 +1,5 @@
+#Dump files
+dump_*
 # Logs
 logs
 *.log
