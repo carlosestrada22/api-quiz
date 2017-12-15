@@ -35,18 +35,23 @@ const getRndWords = size => {
 const getRndQuestions = size => {
     let wordAux = getRndWords(size)
     let newWords = []
-    for (let i = 0; i < questions.length; i++) {
-        for (let j = 0; j < wordAux.length; j++) {
-            (function (wordAux, j) {
-                // wordAux[j].Pregunta = questions[i]
-                newWords.push(wordAux[j])
-            })(wordAux, j)
+    let res = []
+    newWords = wordAux.slice(0, 20).concat(wordAux.slice(0, 20).concat(wordAux.slice(0, 20)))
+    for (let i = 0; i < newWords.length; i++) {
+        let newObj = {
+            Pregunta: questions[getPregunta(i)],
+            Palabra: newWords[i].Palabra,
+            Flibros: newWords[i].Flibros,
+            Fsubtitulos: newWords[i].Fsubtitulos,
+            Tipo: newWords[i].Tipo
         }
+        res.push(newObj)
     }
-    for (let i = 0; i < 20; i++) newWords[i].Pregunta = questions[0]
-    for (let i = 20; i < 40; i++) newWords[i].Pregunta = questions[1]
-    for (let i = 40; i < 60; i++) newWords[i].Pregunta = questions[2]
 
-    console.log(newWords.length)
-    return newWords
+    return res
+}
+const getPregunta = (i) => {
+    if (i < 20) return 0
+    if (i >= 20 && i < 40) return 1
+    if (i >= 40 && i < 60) return 2
 }
